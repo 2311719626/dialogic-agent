@@ -25,20 +25,6 @@
 
 ### ⚙️ 系统架构图
 
-```mermaid
-graph TB
-  A[用户前端] --> B(Spring Boot 3.2)
-  subgraph Spring AI Alibaba
-    B --> C[文档解析模块]
-    C --> D[文本向量化 Embedding]
-    D --> E[PGVector 存储]
-    B --> F[RAG 检索增强]
-    F --> G[调用灵积 Qwen API]
-    G --> H[函数调用处理]
-  end
-  E -->|查询| G
-  H --> I[自定义工具库： 出题/苏格拉底对话]
-  I --> B
-```
+![](./docs/Structure.png)
 
 ---
