@@ -22,7 +22,14 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--        Spring AI Alibaba-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!--        Spring AI Alibaba-->
         <dependency>
             <groupId>com.alibaba.cloud.ai</groupId>
             <artifactId>spring-ai-alibaba-starter</artifactId>
