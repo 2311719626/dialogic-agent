@@ -11,7 +11,7 @@ public class ChatControllerTest {
 
     @Test
     public void testChat() {
-        String result = chatController.chat("你好");
+        String result = chatController.chat("hello");
         System.out.println(result);
     }
 }

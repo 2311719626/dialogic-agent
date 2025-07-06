@@ -1,7 +1,8 @@
 package com.hezhaohui.agent.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,8 +14,8 @@ public class ChatController {
         this.chatClient = builder.build();
     }
 
-    @GetMapping("/chat")
-    public String chat(String input) {
+    @PostMapping("/chat")
+    public String chat(@RequestBody String input) {
         return chatClient.prompt()
                 .user(input)
                 .call()
