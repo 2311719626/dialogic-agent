@@ -8,3 +8,10 @@ logging:
   level:
     root: info
     com.hezhaohui.agent.app: debug
+
+app:
+  chat:
+    history-size: 10 # 每个会话的历史消息数量
+
+chat:
+  retrieve-size: ${app.chat.history-size} # 每次检索的消息数量
