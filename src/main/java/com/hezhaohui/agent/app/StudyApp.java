@@ -1,10 +1,12 @@
 package com.hezhaohui.agent.app;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class StudyApp {
 
@@ -50,6 +52,7 @@ public class StudyApp {
      * @return 聊天响应
      */
     public String doChat(String message) {
+        log.info("收到消息：{}", message);
         ChatResponse chatResponse = chatClient
                 .prompt()
                 .user(message)
@@ -57,6 +60,7 @@ public class StudyApp {
                 .call()
                 .chatResponse();
         String answer = chatResponse.getResult().getOutput().getText();
+        log.info("响应消息：{}", answer);
         return answer;
     }
 }
