@@ -3,3 +3,8 @@ spring:
     active: dev
   application:
     name: dialogic-agent
+
+logging:
+  level:
+    root: info
+    com.hezhaohui.agent.app: debug
