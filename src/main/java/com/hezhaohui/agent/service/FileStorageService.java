@@ -1,6 +1,7 @@
 package com.hezhaohui.agent.service;
 
 import com.hezhaohui.agent.config.FileStorageConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.util.unit.DataSize;
@@ -12,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+@Slf4j
 @Service
 public class FileStorageService {
     private final Path fileStorageLocation;
@@ -67,6 +69,7 @@ public class FileStorageService {
     private String extractFileExtension(String fileName) {
         int lastDotIndex = fileName.lastIndexOf('.');
         if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
+            log.info( "[文件扩展名] " + fileName.substring(lastDotIndex));
             // 提取从 lastDotIndex 开始到字符串末尾的子字符串
             return fileName.substring(lastDotIndex);
         }
@@ -78,6 +81,7 @@ public class FileStorageService {
         String baseName = fileName.substring(0, fileName.lastIndexOf('.'));
         String extension = extractFileExtension(fileName);
         String uniqueSuffix = System.currentTimeMillis() + "_" + (int)(Math.random() * 1000);
+        log.info( "[唯一文件名] " + baseName + "_" + uniqueSuffix + extension);
         return baseName + "_" + uniqueSuffix + extension;
     }
 
