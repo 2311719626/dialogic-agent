@@ -11,6 +11,7 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
 import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_RETRIEVE_SIZE_KEY;
@@ -58,32 +59,34 @@ public class StudyApp {
      * 处理聊天请求
      *
      * @param message 聊天消息
+     * @param chatId 聊天会话ID
      * @return 聊天响应
      */
     public String doChat(String message, String chatId) {
         log.info("收到消息：{}", message);
 
-        ChatResponse chatResponse = createChatResponse(message, chatId);
-        String answer = chatResponse.getResult().getOutput().getText();
-
-        log.info("响应消息：{}", answer);
-        return answer;
-    }
-
-    /**
-     * 创建ChatResponse对象
-     *
-     * @param message 聊天消息
-     * @param chatId 聊天ID
-     * @return ChatResponse对象
-     */
-    private ChatResponse createChatResponse(String message, String chatId) {
-        return chatClient
+        ChatResponse chatResponse = chatClient
                 .prompt()
                 .user(message)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, promptConfig.getHistoryRetrieveSize()))
                 .call()
                 .chatResponse();
+        String answer = chatResponse.getResult().getOutput().getText();
+
+        log.info("响应消息：{}", answer);
+        return answer;
     }
+
+    public Flux<String> doChatFlux(String message, String chatId) {
+        log.info("收到消息：{}", message);
+
+        return chatClient.prompt()
+                .user(message)
+                .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
+                        .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, promptConfig.getHistoryRetrieveSize()))
+                .stream()
+                .content();
+    }
+
 }
