@@ -13,11 +13,11 @@ app:
   file:
     upload-dir: ./uploads
     max-size: 10MB
-    allowed-types:
-      - doc
-      - docx
-      - pdf
-      - markdown
+    allowed-extensions:
+      - .doc
+      - .docx
+      - .pdf
+      - .markdown
   chat:
     history-size: 10 # 每个会话的历史消息数量
 
