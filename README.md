@@ -1,5 +1,7 @@
 # 📚 智能课程学习伙伴
 
+[![wakatime](https://wakatime.com/badge/user/5b960c5b-a7d7-4a2d-bb6b-fdcef6171837/project/8267fa99-c5eb-451e-bf28-4e2b971e2da7.svg)](https://wakatime.com/badge/user/5b960c5b-a7d7-4a2d-bb6b-fdcef6171837/project/8267fa99-c5eb-451e-bf28-4e2b971e2da7)
+
 ## 一、总览
 
 ### 🤲 项目定位
